@@ -17,15 +17,17 @@ root.geometry("800x550")
 root.resizable(False, False)
 
 # Set the logo for the application
-if not os.path.exists("logo.png"):
-    raise FileNotFoundError("Logo file 'logo.png' not found in the current directory.")
-logo = tk.PhotoImage(file="logo.png", width=300, height=150)
-logo_label = tk.Label(root, image=logo)
-logo_label.grid(row=0, column=0, columnspan=2, padx=50, pady=20)
+logo_width = 400
+logo_height = 150
+canvas = tk.Canvas(root, width=logo_width, height=logo_height)
+canvas.grid(row=0, column=0, columnspan=2, padx=50, pady=(40,0))
+logo = tk.PhotoImage(file="logo.png")
+canvas.create_image(logo_width//2, logo_height//2, image=logo, anchor="center")
+canvas.image = logo
 
 # Create a frame for easier management of input fields
 frame = tk.Frame(root, width=700, height=400)
-frame.grid(row=1, column=0, columnspan=2, padx=50, pady=10)
+frame.grid(row=1, column=0, columnspan=2, padx=50, pady=0)
 
 # URL label and text on the same line
 tk.Label(frame, text="URL: ", font=("Arial", 12)).grid(row=0, column=0, padx=10, pady=(10,0), sticky="w")
