@@ -26,31 +26,31 @@ canvas.create_image(logo_width//2, logo_height//2, image=logo, anchor="center")
 canvas.image = logo
 
 # Create a frame for easier management of input fields
-frame = tk.Frame(root, width=700, height=400)
-frame.grid(row=1, column=0, columnspan=2, padx=50, pady=0)
+url_frame = tk.Frame(root, width=700, height=400)
+url_frame.grid(row=1, column=0, columnspan=2, padx=50, pady=0)
 
 # URL label and text on the same line
-tk.Label(frame, text="URL: ", font=("Arial", 12)).grid(row=0, column=0, padx=10, pady=(10,0), sticky="w")
-url_text = tk.Text(frame, height=1, width=50, font=("Arial", 12))
+tk.Label(url_frame, text="URL: ", font=("Arial", 12)).grid(row=0, column=0, padx=10, pady=(10,0), sticky="w")
+url_text = tk.Text(url_frame, height=1, width=50, font=("Arial", 12))
 url_text.grid(row=0, column=1, columnspan=1, padx=10, pady=(10,0))
 # Validation label below URL text
-validation_label = tk.Label(frame, text="", height=2, font=("Arial", 10), fg="red", wraplength=400, justify="left", anchor="n")
+validation_label = tk.Label(url_frame, text="", height=2, font=("Arial", 10), fg="red", wraplength=400, justify="left", anchor="n")
 validation_label.grid(row=1, column=1, padx=10, pady=0, sticky="w")
 
 # Folder path label and text on the same line
-tk.Label(frame, text="Folder Path: ", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=(10,20), sticky="w")
-folder_entry = tk.Entry(frame, width=50, font=("Arial", 12))
+tk.Label(url_frame, text="Folder Path: ", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=(10,20), sticky="w")
+folder_entry = tk.Entry(url_frame, width=50, font=("Arial", 12))
 folder_entry.grid(row=2, column=1, padx=10, pady=(10,20))
 folder_entry.insert(0, CURRENT_DIR+"/downloads")
 
 # File name label and text on the same line
-tk.Label(frame, text="File Name: ", font=("Arial", 12)).grid(row=3, column=0, padx=10, pady=(10,20), sticky="w")
-filename_text = tk.Text(frame, height=1, width=63, font=("Arial", 12))
+tk.Label(url_frame, text="File Name: ", font=("Arial", 12)).grid(row=3, column=0, padx=10, pady=(10,20), sticky="w")
+filename_text = tk.Text(url_frame, height=1, width=63, font=("Arial", 12))
 filename_text.grid(row=3, column=1, columnspan=2, padx=10, pady=(10,20))
 
 # Mode checkbox
-tk.Label(frame, text="Mode: ", font=("Arial", 12)).grid(row=4, column=0, padx=10, pady=(10,20), sticky="w")
-checkbox_frame = tk.Frame(frame)
+tk.Label(url_frame, text="Mode: ", font=("Arial", 12)).grid(row=4, column=0, padx=10, pady=(10,20), sticky="w")
+checkbox_frame = tk.Frame(url_frame)
 checkbox_frame.grid(row=4, column=1, columnspan=2, sticky="w", padx=10, pady=(10,20))
 mode_var = tk.StringVar(value="video")
 tk.Radiobutton(checkbox_frame, text="Video", variable=mode_var, value="video", font=("Arial", 10)).grid(row=0, column=0, padx=10)
@@ -81,7 +81,7 @@ def check_url():
     check_url_button.config(state=tk.ACTIVE)
     download_button.config(state=tk.ACTIVE)
 # Check URL button
-check_url_button = tk.Button(frame, text="Check URL", width=10, font=("Arial", 10), command=check_url)
+check_url_button = tk.Button(url_frame, text="Check URL", width=10, font=("Arial", 10), command=check_url)
 check_url_button.grid(row=0, column=2, padx=10, pady=(10,0))
 
 # ------------------------------------------------------------------------------------------------------------ #
@@ -92,7 +92,7 @@ def select_folder():
     folder_entry.delete(0, tk.END)
     folder_entry.insert(0, folder_selected)
 # Folder path browse button
-tk.Button(frame, text="Browse", width=10, font=("Arial", 10), command=select_folder).grid(row=2, column=2, padx=10, pady=(10,20))
+tk.Button(url_frame, text="Browse", width=10, font=("Arial", 10), command=select_folder).grid(row=2, column=2, padx=10, pady=(10,20))
 
 # ------------------------------------------------------------------------------------------------------------ #
 
@@ -125,8 +125,8 @@ def download():
             check_url_button.config(state=tk.ACTIVE)
             download_button.config(state=tk.ACTIVE)
 # Download button
-download_button = tk.Button(frame, text="Download", font=("Arial", 12), command=download)
-download_button.grid(row=5, column=0, columnspan=2, pady=20)
+download_button = tk.Button(url_frame, text="Download", font=("Arial", 12), command=download)
+download_button.grid(row=5, column=0, columnspan=3, pady=20)
 
 
 # Start the main event loop
