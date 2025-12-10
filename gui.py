@@ -93,6 +93,9 @@ def download():
     downloader.filename = filename_text.get("1.0", tk.END).strip()
     mode = mode_var.get()
 
+    os.makedirs(downloader.folder_path, exist_ok=True)
+    downloader.filename = downloader.filename if downloader.filename else downloader.title
+
     status, message = downloader.check_url()
     if not status: tk.messagebox.showerror("Invalid URL", message)
     else:
